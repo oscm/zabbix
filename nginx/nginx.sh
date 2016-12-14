@@ -1,13 +1,6 @@
 #!/bin/bash
-##################################################
-# AUTHOR: Neo <netkiller@msn.com>
-# WEBSITE: http://www.netkiller.cn
-# Description：zabbix 通过 status 模块监控 nginx
-# Note：Zabbix 3.2
-# DateTime: 2016-11-22
-##################################################
 
-HOST="localhost"
+HOST="127.0.0.1"
 PORT="80"
 stub_status=stub_status
 
