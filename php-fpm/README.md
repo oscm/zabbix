@@ -10,3 +10,4 @@ sed -i "s/;ping/ping/" /etc/php-fpm.d/www.conf
 
 
 
+systemctl reload php-fpm
