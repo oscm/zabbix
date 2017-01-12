@@ -589,7 +589,7 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>nginx.proc</key>
+                    <key>redis.proc</key>
                     <delay>60</delay>
                     <history>30</history>
                     <trends>365</trends>
@@ -657,7 +657,7 @@
         </trigger>
 
 		<trigger>
-            <expression>{Template App Redis:nginx.proc.last()}=0</expression>
+            <expression>{Template App Redis:redis.proc.last()}=0</expression>
             <name>redis was down!</name>
             <url/>
             <status>0</status>
