@@ -1,18 +1,11 @@
 #!/bin/bash
-##################################################
-# AUTHOR: Neo <netkiller@msn.com>
-# WEBSITE: http://www.netkiller.cn
-# Description：zabbix 通过 status 模块监控 php-fpm
-# Note：Zabbix 3.2
-# DateTime: 2016-11-22
-##################################################
 
-HOST="localhost"
+HOST="127.0.0.1"
 PORT="80"
-status="status"
+stub_status="status"
 
 function query() {
-	curl -s http://${HOST}:${PORT}/${status}?xml | grep "<$1>" | awk -F'>|<' '{ print $3}'
+	curl -s http://${HOST}:${PORT}/${stub_status}?xml | grep "<$1>" | awk -F'>|<' '{ print $3}'
 }
 
 if [ $# == 0 ]; then

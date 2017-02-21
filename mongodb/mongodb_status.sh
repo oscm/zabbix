@@ -1,13 +1,7 @@
 #!/bin/bash
-##################################################
-# AUTHOR: Neo <netkiller@msn.com>
-# WEBSITE: http://www.netkiller.cn
-# Description£ºzabbix mongodb monitor
-# Note£ºZabbix 3.2
-# DateTime: 2016-11-23
-##################################################
-HOST=localhost
-PORT=27017
+
+HOST="127.0.0.1"
+PORT="27017"
 USER=monitor
 PASS=chen
 
