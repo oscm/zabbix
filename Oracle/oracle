@@ -1,0 +1,72 @@
+#!/bin/bash
+##################################################
+# AUTHOR: Neo <netkiller@msn.com>
+# WEBSITE: http://www.netkiller.cn
+# Description: oracle monitor
+# Note：Zabbix 3.2
+# DateTime: 2016-12-16
+##################################################
+TIMEOUT=10
+LIBEXEC=/srv/zabbix/libexec
+CONFIG=/srv/zabbix/conf/jdbc.properties
+JAVA=/srv/java/bin/java
+PACKAGE=/srv/zabbix/libexec/zabbix-0.0.1-SNAPSHOT.jar
+JDBC=/srv/zabbix/libexec/
+
+export JRE_HOME=/srv/java
+export JAVA_HOME=/srv/java
+export JAVA_OPTS="-server -Xms128m -Xmx512m -Djava.security.egd=file:/dev/./urandom"
+#"-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9012 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=true"
+
+export CLASSPATH=$JAVA_HOME/lib:$LIBEXEC
+export PATH=$PATH:$JAVA_HOME/bin
+
+PROG="${JAVA} -jar -Dconfig=${CONFIG} -classpath /srv/zabbix/libexec/ ${PACKAGE}"
+##################################################
+
+function discovery(){
+	exit
+}
+function tnsping(){
+	exit
+}
+function query(){
+	${PROG} --query
+	exit
+}
+function usage(){
+	echo "$0 - Software dependency check"
+	echo "        author neo <netkiller@msn.com>"
+	echo "        -d/--discovery "
+	echo "        -p/--ping TNS ping"
+	echo "        -q/--query"
+	echo "        -h/--help"
+	exit
+}
+
+TEMP=`getopt -o dp:qh --long discovery,ping:,query,help -n "$0" -- "$@"`
+
+if [ $# == 0 ] ; then usage >&2 ; exit 1 ; fi
+
+# Note the quotes around `$TEMP': they are essential!
+eval set -- "$TEMP"
+
+#for arg do echo '--> '"\`$arg'" ; done
+
+while true ; do
+        case "$1" in
+            -d|--discovery)
+				discovery ${CONFIG}
+				;;
+            -p|--ping)
+				icmp $2 ; shift 2 ;;
+            -q|--query)
+                 	query
+					;;
+		-h|--help)
+			usage
+			;;
+                --) shift ; break ;;
+                *)  exit 1 ;;
+        esac
+done
