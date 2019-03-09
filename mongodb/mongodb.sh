@@ -57,7 +57,7 @@ if [ $mongo_status -ne $EXIT_OK ] ; then
   echo "mongo exec error"
   exit $EXIT_ERROR
 fi
-value=$(echo $output | jq $index)
+value=$(echo $output | jq $index 2>/dev/null)
 jq_status=$?
 echo $value
 
